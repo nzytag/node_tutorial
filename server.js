@@ -58,44 +58,63 @@
 
 //example 5
 
-var http = require('http');
-var url = require('url');
+// var http = require('http');
+// var url = require('url');
+//
+// function start(route) {
+//   function onRequest(request, response) {
+//     var pathname = url.parse(request.url).pathname;
+//     console.log('Request for ' + pathname + ' received.');
+//
+//     route(pathname);
+//     response.writeHead(200, {'Content-Type': 'text/plain'});
+//     response.write('Hello World');
+//     response.end();
+//   }
+//   http.createServer(onRequest).listen(8888);
+//   console.log('Server has started.');
+// }
+// exports.start = start;
 
-function start(route) {
+//example 6
+
+// var http = require('http');
+// var url = require('url');
+//
+// function start(route, handle) {
+//   function onRequest(request, response){
+//     var pathname = url.parse(request.url).pathname;
+//     console.log('Request for ' + pathname + 'received.');
+//
+//     route(handle, pathname);
+//
+//     response.writeHead(200, {'Content-Type': 'text/plain'});
+//     response.write('Hello World');
+//     response.end();
+//   }
+//   http.createServer(onRequest).listen(8888);
+//   console.log('Server has started.');
+// }
+// exports.start = start;
+
+//example 7
+var http = require("http");
+var url = require("url");
+
+function start(route, handle) {
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-    console.log('Request for ' + pathname + ' received.');
-
-    route(pathname);
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('Hello World');
+    console.log("Request for " + pathname + " received.");
+    response.writeHead(200, {"Content-Type": "text/plain"});
+    var content = route(handle, pathname)
+    response.write(content);
     response.end();
   }
+
   http.createServer(onRequest).listen(8888);
-  console.log('Server has started.');
+  console.log("Server has started.");
 }
 exports.start = start;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
